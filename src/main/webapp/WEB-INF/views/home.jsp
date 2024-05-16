@@ -88,14 +88,13 @@
 													</tr>
 												</c:when>
 												<c:otherwise>
-													<c:forEach items="${dlist}" var="vo" end="5">
+													<c:forEach items="${dlist}" var="vo" end="4">
 														<c:if test="${vo.approvalVOs[0].rank ne 0}">
 															<tr>
 																<td>${vo.id}</td>
 																<c:if test="${vo.templateVO.tempName eq '상여신청서'}">
 																	<td class="text-start" style="max-width: 150px;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;">
-																		<a class="hovercursor" data-document-anchor="${vo.id}"
-																		   >
+																		<a class="hovercursor" data-document-anchor="${vo.id}">
 																				${vo.title}
 																		</a>
 																	</td>

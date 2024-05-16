@@ -31,9 +31,14 @@ Date date = new Date();
 SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 String strDate = simpleDate.format(date);
 %>
-    <div class="pagetitle">
-        <h1 id="board">${board}공지사항</h1>
-    </div>
+<div class="pagetitle" style="text-align: center;">
+    <h1 id="board">
+        <c:if test="${board eq 'all'}">전체 공지</c:if>
+        <c:if test="${board eq 'represent'}">대표 공지</c:if>
+        <c:if test="${board eq 'coc'}">경조사 공지</c:if>
+         
+    </h1>
+</div>
     <section class="section">
         <div class="row">
             <div class="col-12">

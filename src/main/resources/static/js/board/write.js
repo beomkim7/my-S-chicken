@@ -12,10 +12,15 @@ let important = document.getElementById("important")
 let board = document.getElementById("board")
 
 	console.log(sort.value);
-	console.log(board.innerHTML);
+	console.log(board.innerHTML.trim());
 
-		if(board.innerHTML=="대표공지사항"){
+		if(board.innerHTML.trim()=="대표 공지"){
 			sort.value =1;
+		}
+		if(board.innerHTML.trim()=="경조사 공지"){
+			console.log("들어오니 ?")
+			sort.value = 0;
+			important.disabled = true;
 		}
 		
 	

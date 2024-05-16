@@ -19,10 +19,9 @@
 <main id="main" class="main">
     <div class="pagetitle" style="text-align: center;">
         <h1>
-			<c:if test="${board eq 'all'}">전체</c:if>
-			<c:if test="${board eq 'represent'}">대표</c:if>
-			<c:if test="${board eq 'coc'}">경조사</c:if>
-			 게시판
+			<c:if test="${board eq 'all'}">전체 공지</c:if>
+			<c:if test="${board eq 'represent'}">대표 공지</c:if>
+			<c:if test="${board eq 'coc'}">경조사 공지</c:if>
 		</h1>
     </div>
     <section class="section">
