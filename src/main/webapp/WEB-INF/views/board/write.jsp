@@ -50,8 +50,8 @@ String strDate = simpleDate.format(date);
                             <div class="mb-3">
                                 <label for="sort" class="form-label">종류</label>
                                 <select class="form-select" style="width: 200px;"name="sort" id=sort>
-                                    <option value="0">경조사 게시</option>
-                                    <option value="1">대표 게시</option>
+                                    <option value="0">경조사 공지</option>
+                                    <option value="1">대표 공지</option>
                                 </select>
                             </div>
 							<c:forEach items="${list.employeeVO}" var="ar">

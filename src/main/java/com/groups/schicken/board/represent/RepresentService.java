@@ -61,10 +61,6 @@ public class RepresentService implements BoardService {
 
 		pager.makeIndex();
 		pager.makeNum(representDAO.cacTotalCount(map));
-		System.out.println(pager.getStartIndex());
-		System.out.println(pager.getPerPage());
-		System.out.println(pager.getTotalPage());
-		System.out.println(pager.getLastNum());
 
 		return representDAO.cacgetList(map);
 
@@ -79,8 +75,6 @@ public class RepresentService implements BoardService {
 
 		pager.makeIndex();
 		pager.makeNum(representDAO.allTotalCount(map));
-
-		System.out.println(representDAO.allTotalCount(map));
 
 		return representDAO.allList(map);
 	}

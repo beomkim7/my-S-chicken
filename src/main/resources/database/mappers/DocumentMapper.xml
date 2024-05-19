@@ -150,16 +150,13 @@
 			) sub
 	</sql>
 	
-		<sql id="countCheck">
+	<sql id="countCheck">
 		(SELECT 
 			COUNT(*) AS "count123",document_id
 			FROM approval
 			WHERE result =1
 			GROUP BY document_id) sub
 	</sql>
-	
-
-	
 
 	<select id="approvalList" resultMap="allListResult">
 		SELECT 

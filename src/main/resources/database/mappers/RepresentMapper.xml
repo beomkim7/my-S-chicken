@@ -106,8 +106,7 @@
     	<association property="employeeVO" javaType="EmployeeVO" autoMapping="true"/>	
 		<collection property="fileVO" javaType="List" ofType="FileVO" autoMapping="true" columnPrefix="attach_">
 				<id column="id" property="id"/>
-		</collection>
-		
+		</collection>		
 	</resultMap>
 
 <!-- FileVO를 매핑하는 resultMap -->
@@ -164,9 +163,7 @@
 			<if test="content != null and content !=''">
 				content=#{content},
 			</if>
-
 				important=#{important}
-
 		</set>
 		WHERE id=#{id}
 	</update>

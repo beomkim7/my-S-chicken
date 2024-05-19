@@ -50,14 +50,14 @@
                         <td style="padding: 0px !important; border: 0px currentColor; border-image: none;text-align: right;font-weight: bold; vertical-align: middle;"
                         colspan="2" class="">
                             <div class="mb-2">
-                                <button class="btn btn-primary">인쇄미리보기</button>
+                                <!-- <button class="btn btn-primary">인쇄미리보기</button> -->
                                 <button class="btn btn-primary" id="sangsin">상신</button>
                                 <button class="btn btn-primary" type="button" id = "cancel">취소</button>
+                                <button type="button" id="callModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#call">
+                                    불러오기
+                                </button>
+                                <button class="btn btn-primary" id="tempSave">임시저장</button>
                             </div>
-                            <button type="button" id="callModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#call">
-                                불러오기
-                            </button>
-                            <button class="btn btn-primary" id="tempSave">임시저장</button>
                         </td>
                     </tr>
 
@@ -169,7 +169,7 @@
                                             </span>
 
                                             <span class="sign_wrap">
-                                                <span class="sign_name"><strong>ok</strong></span>
+                                                <span class="sign_name"><strong></strong></span>
                                             </span>
                                             <span class="sign_date_wrap">
                                                 <span class="sign_date " id=""><%=strDate %></span>
@@ -179,51 +179,51 @@
                                     <span class="sign_member_wrap nextdo">
                                         <span class="sign_member">                                            
                                             <span class="sign_rank_wrap">
-                                                <span class="sign_rank">직급</span>
+                                                <span class="sign_rank"></span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date " id="name">이름</span>
+                                                <span class="sign_date " id="name">  </span>
                                             </span>
 
                                             <span class="sign_wrap">
-                                                <span class="sign_name"><strong>서명</strong></span>
+                                                <span class="sign_name"><strong>   </strong></span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date ">날짜</span>
+                                                <span class="sign_date "> </span>
                                             </span>
                                         </span>
                                     </span>
                                     <span class="sign_member_wrap" id="">
                                         <span class="sign_member">                                            
                                             <span class="sign_rank_wrap">
-                                                <span class="sign_rank">직급</span>
+                                                <span class="sign_rank"> </span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date " id="name">이름</span>
+                                                <span class="sign_date " id="name">  </span>
                                             </span>
 
                                             <span class="sign_wrap">
-                                                <span class="sign_name"><strong>서명</strong></span>
+                                                <span class="sign_name"><strong>   </strong></span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date " id="">날짜</span>
+                                                <span class="sign_date " id=""> </span>
                                             </span>
                                         </span>
                                     </span>
                                     <span class="sign_member_wrap" id="">
                                         <span class="sign_member">                                           
                                             <span class="sign_rank_wrap">
-                                                <span class="sign_rank">직급</span>
+                                                <span class="sign_rank"></span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date " id="name">이름</span>
+                                                <span class="sign_date " id="name">  </span>
                                             </span>
 
                                             <span class="sign_wrap">
-                                                <span class="sign_name"><strong>서명</strong></span>
+                                                <span class="sign_name"><strong>   </strong></span>
                                             </span>
                                             <span class="sign_date_wrap">
-                                                <span class="sign_date " id="">날짜</span>
+                                                <span class="sign_date " id=""> </span>
                                             </span>
                                         </span>
                                     </span>
