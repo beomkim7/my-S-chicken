@@ -34,24 +34,29 @@ refuse_btn.addEventListener("click",(e)=>{
 	
 	e.preventDefault();
 	
-	let msg = prompt("내용을 입력해주세요","");
-	console.log(msg);
-	msg = "반려사유:"+msg
-	console.log(msg)
-	for(let i =0 ; i < appId.length; i++){
-		if(appId[i].querySelector(".sign_date").dataset.id == logId){			
+	let msg = prompt("내용을 입력해주세요",);
+	if(msg == ""){
+		alert("사유를 입력하세요");
+		return;
+	}
+	if(msg != null){
+		msg = "반려사유:"+msg
+		console.log(msg)
+		for(let i =0 ; i < appId.length; i++){
+			if(appId[i].querySelector(".sign_date").dataset.id == logId){			
+				
+				appId[i].querySelector(".date").innerHTML=date.dataset.strdate;
+				
+			const formdata = new FormData(frm);
+			formdata.append("comment",msg);
+			formdata.append("employeeId",logId);
 			
-			appId[i].querySelector(".date").innerHTML=date.dataset.strdate;
-			
-		const formdata = new FormData(frm);
-		formdata.append("comment",msg);
-		formdata.append("employeeId",logId);
-		
-		fetch("/document/refuseUpdate",{
-			method:"post",
-			body:formdata
-		}).then(r=>console.log(r))		
-			.then(r=>location.reload(true))
+			fetch("/document/refuseUpdate",{
+				method:"post",
+				body:formdata
+			}).then(r=>console.log(r))		
+				.then(r=>location.reload(true))
+			}
 		}
 	}
 })
