@@ -76,10 +76,6 @@ let files = document.querySelectorAll(".files")
 			})
 		}				
 	})
-	
-	
-	
-
 
 	btn.addEventListener('click',(e)=>{
 		e.preventDefault();		
