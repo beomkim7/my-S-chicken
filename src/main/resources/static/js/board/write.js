@@ -10,6 +10,8 @@ let sort = document.getElementById("sort")
 const frm = document.querySelector("#frm")
 let important = document.getElementById("important")
 let board = document.getElementById("board")
+let attach_id = document.querySelector(".attach_id")
+let files = document.querySelectorAll(".files")
 
 	console.log(sort.value);
 	console.log(board.innerHTML.trim());
@@ -60,6 +62,22 @@ let board = document.getElementById("board")
         .catch(error => {
             console.error(error);
         });
+
+	
+	attach_id.addEventListener("change",()=>{
+		console.log("ehlsk ?")
+		console.log(files.length)
+		console.log(attach_id)
+		for(let i = 0 ; i < files.length;i++)
+		if(files[i].querySelector("input").value != ""){			
+			files[i].querySelector("a").style.display = "block";
+			files[i+1].style.display = "block"
+			console.log(files[i].querySelector("input").value)
+		}
+	})
+	
+	
+	
 
 
 	btn.addEventListener('click',(e)=>{

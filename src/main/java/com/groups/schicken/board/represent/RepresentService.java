@@ -81,7 +81,7 @@ public class RepresentService implements BoardService {
 
 
 	@Override
-	public int add(BoardVO boardVO,MultipartFile attach) throws Exception {
+	public int add(BoardVO boardVO,MultipartFile [] attach) throws Exception {
 		BoardVO vo2 = new BoardVO();
 			int result=representDAO.add(boardVO);
 			
@@ -99,26 +99,30 @@ public class RepresentService implements BoardService {
 			if(boardVO.getImportant()){
 				noticer.sendNoticeWhole(getNoticeContent(boardVO.getTitle()), boardVO.getId() + "" , NotificationType.Notice);
 			}
-			if(attach.isEmpty()) {
-				return result;
+			
+			for(int i =0 ; i <=attach.length ; i++) {
+			
+				if(attach[i].isEmpty()) {
+					return result;
+				}
+	
+				FileVO fileVO = new FileVO();
+	
+	
+				fileVO.setParentId(boardVO.getId());
+				fileVO.setTblId("102");
+	
+				boolean result1 = fileManager.uploadFile(attach[i], fileVO);
+	
+	
+				if(result1) {
+					int intresult = 1;
+					result=intresult;
+				}
 			}
-
-			FileVO fileVO = new FileVO();
-
-
-			fileVO.setParentId(boardVO.getId());
-			fileVO.setTblId("102");
-
-			boolean result1 = fileManager.uploadFile(attach, fileVO);
-
-
-			if(result1) {
-				int intresult = 1;
-				result=intresult;
-			}
-
-
-			return result;
+	
+		return result;
+			
 	}
 
 	private String getNoticeContent(String title){

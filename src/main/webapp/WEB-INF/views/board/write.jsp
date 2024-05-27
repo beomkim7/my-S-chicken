@@ -72,10 +72,18 @@ String strDate = simpleDate.format(date);
                                 <input type="checkbox" class="form-check-input" id="important" name="important">
                                 <input type="hidden" name="_important" value="on">
                             </div>
-                            <div>
-                            	<input type="file" name="attach">
+                            
+                            <div class="attach_id">
+                                <div class="files">
+                                    <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
+                                </div>
+                                <div class="files" style="display: none;">
+                                    <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
+                                </div>
+                                <div class="files" style="display: none;">
+                                    <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
+                                </div>
                             </div>
-
 
                             <button type="submit" class="btn btn-primary float-end" id="btn">게시하기</button>
                         </form>
