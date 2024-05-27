@@ -48,11 +48,8 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <c:if test="${vo.fileVO.size() != 0}">
-                                            첨부파일 :
-                                        </c:if>
                                         <c:forEach items="${vo.fileVO}" var="file">
-                                        <a href="/fileDown?id=${file.id}">${file.originName}</a>
+                                            첨부파일 :<a href="/fileDown?id=${file.id}">${file.originName}</a><br>
                                         </c:forEach>
                                     </td>
                                 </tr>

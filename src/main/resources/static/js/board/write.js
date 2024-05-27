@@ -63,17 +63,18 @@ let files = document.querySelectorAll(".files")
             console.error(error);
         });
 
-	
+
 	attach_id.addEventListener("change",()=>{
-		console.log("ehlsk ?")
-		console.log(files.length)
-		console.log(attach_id)
-		for(let i = 0 ; i < files.length;i++)
-		if(files[i].querySelector("input").value != ""){			
-			files[i].querySelector("a").style.display = "block";
-			files[i+1].style.display = "block"
-			console.log(files[i].querySelector("input").value)
-		}
+		for(let i = 0 ; i < files.length;i++){
+			if(files[i].querySelector("input").value != ""){		
+				files[i].querySelector("a").style.display = "inline";				
+			}
+			
+			files[i].querySelector("a").addEventListener("click",()=>{				
+				files[i].querySelector("input").value = ""
+				files[i].querySelector("a").style.display = "none";
+			})
+		}				
 	})
 	
 	
@@ -81,11 +82,9 @@ let files = document.querySelectorAll(".files")
 
 
 	btn.addEventListener('click',(e)=>{
-		e.preventDefault();
-		
+		e.preventDefault();		
 		
 		check1();
-
 
 		if(title.value == ''){
 			alert("제목을 입력하세요");
@@ -98,6 +97,9 @@ let files = document.querySelectorAll(".files")
 			
 			return false;			
 		}
+	
+	
+	
 	frm.submit();
 	})
 	

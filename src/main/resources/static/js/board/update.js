@@ -10,15 +10,15 @@ let sort = document.getElementById("sort")
 const frm = document.querySelector("#frm")
 let important = document.getElementById("important")
 let pic = document.querySelectorAll(".my-a")
-
+const fini = document.getElementById("fini")
 	
 	
 	if(pic.length==3){
 		const ment = document.getElementById("ment")
 		ment.innerHTML = "파일은 3개까지입니다."
-		ment.style.color = "red";
+		ment.style.color = "red";		
 		fini.disabled
-		}		
+		}
 	
 
 console.log(important.value);
@@ -85,6 +85,7 @@ console.log(sort.dataset.sort);
 	})
 
 	document.getElementById("file-delete-btn")?.addEventListener("click", e => {
+		console.log("dhodkseho?")
 		e.preventDefault();
 		let fileId = e.target.getAttribute("data-id");
 		let name = e.target.getAttribute("data-name")
@@ -108,7 +109,9 @@ console.log(sort.dataset.sort);
 			success : function(data){
 				e.target.parentElement.remove();
 				alert("삭제 되었습니다");
-				
+				if(pic.length <3){
+					fini.removeAttribute("disabled");
+				}
 			}
 				// data.text();
 	})

@@ -100,10 +100,10 @@ public class RepresentService implements BoardService {
 				noticer.sendNoticeWhole(getNoticeContent(boardVO.getTitle()), boardVO.getId() + "" , NotificationType.Notice);
 			}
 			
-			for(int i =0 ; i <=attach.length ; i++) {
-			
+			for(int i =0 ; i <attach.length ; i++) {
+				
 				if(attach[i].isEmpty()) {
-					return result;
+					continue;
 				}
 	
 				FileVO fileVO = new FileVO();

@@ -77,10 +77,10 @@ String strDate = simpleDate.format(date);
                                 <div class="files">
                                     <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
                                 </div>
-                                <div class="files" style="display: none;">
+                                <div class="files">
                                     <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
                                 </div>
-                                <div class="files" style="display: none;">
+                                <div class="files">
                                     <input type="file" name="attach"><a href="#" style="display: none;">지우기</a>
                                 </div>
                             </div>
