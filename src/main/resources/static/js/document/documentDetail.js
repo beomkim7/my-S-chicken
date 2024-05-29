@@ -393,7 +393,6 @@ function hyuga(){
 			del_app.remove()
 		}
 	console.log(arr);			
-			
 	})
 		
 			const zeroRank = document.getElementById("zeroRank").value;
@@ -403,17 +402,14 @@ function hyuga(){
 			employeeArr=[zeroId];
 			resultArr=[zeroResult];
 			
-		register.addEventListener("click",()=>{
-			
+		register.addEventListener("click",()=>{			
 			
 			let goList = approval_List.querySelectorAll("li")
-
 			
 			const approve = document.querySelectorAll(".sign_member_wrap");			
 			const element_level = approve[0].querySelector("#name");
 			
-			console.log(element_level)
-			
+			console.log(element_level)			
 
 			for(let i = 1 ; i<3;i++){
 			
@@ -424,16 +420,14 @@ function hyuga(){
 			employeeArr=[zeroId];
 			resultArr=[zeroResult];
 			
-			}
-			
+			}			
 			
 			let approve_arr = 4 - arr.length;			
 			
 			for(let i = approve_arr, j = 1 ; i <= 3;i++,j++){
 			approve[i].querySelector("#name").innerHTML = goList[i-approve_arr].getAttribute("data-name");
 			approve[i].querySelector(".sign_rank").innerHTML = goList[i-approve_arr].getAttribute("data-level");
-			
-				
+							
 			rankArr.push(j);
 			employeeArr.push(goList[i-approve_arr].getAttribute("data-id"));
 			resultArr.push(0);
@@ -447,7 +441,6 @@ function hyuga(){
 					approve[i].style.backgroundColor = 'rgb(209, 208, 207)';
 				}
 			}
-
 
 			if(goList.length==0){
 				alert("결재자는 최소 1명 이상입니다")
@@ -480,8 +473,6 @@ ClassicEditor
 .catch(error => {
     console.error(error);
 });
-
-
 
 /*$('#callModalButton').click(function() {
     $.ajax({

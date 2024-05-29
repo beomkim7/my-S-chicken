@@ -3,6 +3,7 @@ package com.groups.schicken.board.represent;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,18 +109,34 @@ public class RepresentController {
 	}
 
 	@PostMapping("update")
-	public String setUpdate(BoardVO boardVO,@RequestParam(value="attach") MultipartFile file)throws Exception{
-		System.out.println(boardVO.getImportant());
+	public String setUpdate(BoardVO boardVO,@RequestParam(value="attach") MultipartFile [] file)throws Exception{
 		int result = representService.update(boardVO,file);
-		System.out.println("로직 들어오기");
 
 		return "redirect:./list";
+	}
+	
+	@PostMapping("fileupdate")
+	public ResponseEntity<?> fileUpdate(BoardVO boardVO,@RequestParam(value="attach") MultipartFile file)throws Exception{
+		
+		int result = representService.fileupdate(boardVO,file);
+		boardVO=representService.getDetail(boardVO);
+		System.out.println(boardVO+"kbs3");
+
+		return ResponseEntity.ok(boardVO);
+	}
+	
+	@GetMapping("fileShow")
+	public ResponseEntity<?> fileShow(BoardVO boardVO)throws Exception{
+		
+		boardVO = representService.getDetail(boardVO);
+		
+		return ResponseEntity.ok(boardVO);
+		
 	}
 
 	@PostMapping("delete")
 	public String delete(BoardVO boardVO)throws Exception{
-		int result = representService.delete(boardVO);
-		
+		int result = representService.delete(boardVO);		
 		
 		return "redirect:./list";
 		

@@ -159,7 +159,7 @@ public class RepresentService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardVO boardVO,MultipartFile file) throws Exception {
+	public int update(BoardVO boardVO,MultipartFile [] file) throws Exception {
 		BoardVO vo2 = new BoardVO();
 		int result=representDAO.update(boardVO);
 		
@@ -176,25 +176,22 @@ public class RepresentService implements BoardService {
 			boardVO.setRank(0L);
 			result = representDAO.impRank(boardVO);
 		}
-
-		if(file.isEmpty()) {
-			return result;
+		
+		for(int i = 0 ; i < file.length ; i++) {
+			System.out.println(file+"김범서s");
+			if(file[i].isEmpty()) {
+				continue;
+			}
+			FileVO fileVO = new FileVO();			
+			fileVO.setParentId(boardVO.getId());
+			fileVO.setTblId("102");
+			boolean result1= fileManager.uploadFile(file[i], fileVO);
+			
+			if(result1) {
+				int intresult=1;
+				result = intresult;
+			}
 		}
-
-		FileVO fileVO = new FileVO();
-		fileVO.setParentId(boardVO.getId());
-
-		boolean result1 = fileManager.deleteFile(fileVO);
-
-		fileVO.setParentId(boardVO.getId());
-		fileVO.setTblId("102");
-		result1= fileManager.uploadFile(file, fileVO);
-
-		if(result1) {
-			int intresult=1;
-			result = intresult;
-		}
-
 		return result;
 	}
 
@@ -205,7 +202,23 @@ public class RepresentService implements BoardService {
 		return result;
 	}
 
-
+	public int fileupdate(BoardVO boardVO,MultipartFile file) throws Exception {
+		int result = 0;
+		System.out.println("들어오니 ?");
+		
+			System.out.println("여기는 ?");
+			FileVO fileVO = new FileVO();
+			fileVO.setParentId(boardVO.getId());
+			fileVO.setTblId("102");
+			boolean result1 = fileManager.uploadFile(file, fileVO);
+			
+			if(result1) {
+				result =1;			
+			}
+		
+		
+		return result;
+	}
 
 
 

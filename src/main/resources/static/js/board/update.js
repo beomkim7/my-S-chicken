@@ -9,20 +9,39 @@ let content = document.getElementById("content")
 let sort = document.getElementById("sort")
 const frm = document.querySelector("#frm")
 let important = document.getElementById("important")
-let pic = document.querySelectorAll(".my-a")
 const fini = document.getElementById("fini")
-	
-	
-	if(pic.length==3){
-		const ment = document.getElementById("ment")
+const board = document.querySelector("h1")
+const fileman = document.getElementById("file_man")
+const ment = document.getElementById("ment")
+const board_id = document.getElementById("board_id")
+
+	let arr = [];
+	fetch("/represent/fileShow?id=" + board_id.value, {
+	    method: "GET",
+	    headers: {
+	        'Content-Type': 'application/json',  // Content-Type 헤더는 GET 요청에는 필요하지 않습니다.
+	    }
+	}).then(r=>r.json())
+	.then(res=>{
+		let replies = "";
+
+		console.log(res);
+		res.fileVO.forEach(reply=>{
+			replies +=			
+			`<div>현재파일 : ${reply.originName} <a class="file_delete" id="file-delete-btn" data-name="${reply.name}" data-id="${reply.id}" href="#">지우기</a></div>`
+			arr.push(replies);
+		})
+	if(arr.length==3){
 		ment.innerHTML = "파일은 3개까지입니다."
 		ment.style.color = "red";		
-		fini.disabled
+		fini.disabled = true;
 		}
+	fileman.innerHTML +=replies;
+	
+	})
+	
 	
 
-console.log(important.value);
-console.log(sort.dataset.sort);
 
 	window.addEventListener('load',function(){
 		sort.value=sort.dataset.sort
@@ -83,65 +102,67 @@ console.log(sort.dataset.sort);
 		}
 	frm.submit();
 	})
-
-	document.getElementById("file-delete-btn")?.addEventListener("click", e => {
-		console.log("dhodkseho?")
-		e.preventDefault();
-		let fileId = e.target.getAttribute("data-id");
-		let name = e.target.getAttribute("data-name")
-		// get example
-		// fetch("/fileDelee?id="+fileId+"&name="+jdsjbgj)
-		// .then(r =>r.json())
-		// .then(r => {
-			
-		// })
 		
-		let data = {
-			'id' :  fileId , //fileId
-			'name':	name
-		};
-		$.ajax({
-			url:"/fileDelete",
-			method: 'post',
-			data: JSON.stringify(data),
-			contentType:"application/json",
-			dataType : "JSON",
-			success : function(data){
-				e.target.parentElement.remove();
-				alert("삭제 되었습니다");
-				if(pic.length <3){
-					fini.removeAttribute("disabled");
-				}
+	fini.addEventListener("change",(e)=>{
+		const formData = new FormData(frm);		
+		console.log(formData);
+		console.log(fini.value);
+		console.log(`${board.dataset.id}`)
+		console.log(e.target.files)
+		
+		fetch('fileupdate',{
+			method:"post",
+			body:formData
+		}).then(r=>r.json())
+		.then(res=>{
+			
+			let replies = "";
+			res.fileVO.forEach(reply=>{
+				replies +=			
+				`<div>현재파일 : ${reply.originName} <a class="file_delete" id="file-delete-btn" data-name="${reply.name}" data-id="${reply.id}" href="#">지우기</a></div>`
+			})
+		fileman.innerHTML +=replies;
+			if(fileman.length==3){
+			ment.innerHTML = "파일은 3개까지입니다."
+			ment.style.color = "red";		
+			fini.disabled = true;
 			}
-				// data.text();
+		})
 	})
-
-		//post
-		// fetch("/fileDelete",{
-		// 	method:'post',
-		// 	headers : {
-		// 		'content-type' : 'application/json;charset=utf-8' //타입
-		// 	},
-		// 	body:JSON.stringify(data)
-		// 	// body:JSON.stringify({
-		// 	// 	'id' : fileId
-		// 	// })
-		// }).then( r => r.text() )
-		// .then( r=> console.log(r))
-	})
-
-
-
-	// const 
-
-	// let ad = {
-	// 	'id' : '1245'
-	// }
 	
-	// fetch("/fileDelete",{
-	// 	method:'post',
-	// 	body:JSON.stringify(ad)
-	// })
+	fileman.addEventListener("click", e => {
+		console.log(arr.length);
+		if(e.target.tagName=="A"){
+			let check = confirm("이미지를 삭제하시겠습니까?");
+				if(check){	
+					let fileId = e.target.getAttribute("data-id");
+					let name = e.target.getAttribute("data-name")
+					
+					let data = {
+						'id' :  fileId , //fileId
+						'name':	name
+					};		
+					$.ajax({
+						url:"/fileDelete",
+						method: 'post',
+						data: JSON.stringify(data),
+						contentType:"application/json",
+						dataType : "JSON",
+						success : function(data){
+							e.target.parentElement.remove();
+							alert("삭제 되었습니다");
+							console.log(arr.length)						
+							if(pic.length <4){
+								ment.innerHTML="";
+								fini.disabled = false;
+								}
+							}
+					})
+				}
+				
+			}
+		})
+
 	
 
 

@@ -30,7 +30,7 @@ SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 String strDate = simpleDate.format(date);
 %>
     <div class="pagetitle" style="text-align: center;">
-        <h1>
+        <h1 data-id = "${board}">
             <c:if test="${board eq 'all'}">전체</c:if>
             <c:if test="${board eq 'represent'}">대표</c:if>
             <c:if test="${board eq 'coc'}">경조사</c:if>
@@ -54,7 +54,7 @@ String strDate = simpleDate.format(date);
                             </div>
 
 
-                            <input type="hidden" name="id" value="${vo.id}">
+                            <input type="hidden" id="board_id" name="id" value="${vo.id}">
                             <input type="hidden" name="writerId" value="123">
                             <input type="hidden" name="isDelete" value="0">
                             <input type="hidden" name="writeDate" value="<%=strDate %>">
@@ -71,17 +71,11 @@ String strDate = simpleDate.format(date);
                                 <input type="checkbox" class="form-check-input" id="important" name="important" value="${vo.important}">
                                 <input type="hidden" name="_important" value="on">
                             </div>
-                            <div>
-                            	<input type="file" name="attach" id="fini">
+                            <input type="file" name="attach" id="fini">
+                            <div id="file_man">
                             	<div id="ment"></div>
-                                <c:forEach items="${vo.fileVO}" var="file">
-                                	
-                                	<div>현재파일 : ${file.originName} <a class="my-a" id="file-delete-btn" data-name="${file.name}" data-id="${file.id}" href="#">지우기</a></div>
-                                	
-                                </c:forEach>
+                                
                             </div>
-
-
                             <button type="submit" class="btn btn-primary float-end" id="btn">게시하기</button>
                         </form>
                     </div>
