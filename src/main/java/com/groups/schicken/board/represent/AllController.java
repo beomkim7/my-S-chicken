@@ -33,7 +33,8 @@ public class AllController {
 	
 	@GetMapping("list")
 	public String list(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,Pager pager,Model model)throws Exception{
-		
+		System.out.println(boardVO.getSort()+"알아보기");
+		boardVO.setSort(3);
 		List<BoardVO> imp = representService.impList(boardVO);
 		model.addAttribute("imp", imp);
 		
