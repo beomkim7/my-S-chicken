@@ -72,8 +72,9 @@ String strDate = simpleDate.format(date);
                                 <input type="hidden" name="_important" value="on">
                             </div>
                             <input type="file" name="attach" id="fini">
+                            <div id="ment"></div>
                             <div id="file_man">
-                            	<div id="ment"></div>
+                            	
                                 
                             </div>
                             <button type="submit" class="btn btn-primary float-end" id="btn">게시하기</button>

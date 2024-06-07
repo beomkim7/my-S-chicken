@@ -16,6 +16,7 @@ const ment = document.getElementById("ment")
 const board_id = document.getElementById("board_id")
 
 	let arr = [];
+	
 	fetch("/represent/fileShow?id=" + board_id.value, {
 	    method: "GET",
 	    headers: {
@@ -31,6 +32,7 @@ const board_id = document.getElementById("board_id")
 			`<div>현재파일 : ${reply.originName} <a class="file_delete" id="file-delete-btn" data-name="${reply.name}" data-id="${reply.id}" href="#">지우기</a></div>`
 			arr.push(replies);
 		})
+		
 	if(arr.length==3){
 		ment.innerHTML = "파일은 3개까지입니다."
 		ment.style.color = "red";		
@@ -103,7 +105,7 @@ const board_id = document.getElementById("board_id")
 	frm.submit();
 	})
 		
-	fini.addEventListener("change",(e)=>{
+	fini.addEventListener("input",(e)=>{
 		const formData = new FormData(frm);		
 		console.log(formData);
 		console.log(fini.value);
@@ -117,12 +119,15 @@ const board_id = document.getElementById("board_id")
 		.then(res=>{
 			
 			let replies = "";
+			arr = [];
 			res.fileVO.forEach(reply=>{
 				replies +=			
 				`<div>현재파일 : ${reply.originName} <a class="file_delete" id="file-delete-btn" data-name="${reply.name}" data-id="${reply.id}" href="#">지우기</a></div>`
+				arr.push(replies);
 			})
-		fileman.innerHTML +=replies;
-			if(fileman.length==3){
+			fileman.innerHTML =replies;
+		
+			if(arr.length==3){
 			ment.innerHTML = "파일은 3개까지입니다."
 			ment.style.color = "red";		
 			fini.disabled = true;
@@ -131,7 +136,6 @@ const board_id = document.getElementById("board_id")
 	})
 	
 	fileman.addEventListener("click", e => {
-		console.log(arr.length);
 		if(e.target.tagName=="A"){
 			let check = confirm("이미지를 삭제하시겠습니까?");
 				if(check){	
@@ -151,8 +155,8 @@ const board_id = document.getElementById("board_id")
 						success : function(data){
 							e.target.parentElement.remove();
 							alert("삭제 되었습니다");
-							console.log(arr.length)						
-							if(pic.length <4){
+							
+							if(fileman.getElementsByTagName("DIV").length <4){
 								ment.innerHTML="";
 								fini.disabled = false;
 								}

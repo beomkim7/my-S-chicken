@@ -132,7 +132,7 @@ public class RepresentService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardVO boardVO,MultipartFile [] file) throws Exception {
+	public int update(BoardVO boardVO) throws Exception {
 		BoardVO vo2 = new BoardVO();
 		int result=representDAO.update(boardVO);
 		
@@ -150,21 +150,6 @@ public class RepresentService implements BoardService {
 			result = representDAO.impRank(boardVO);
 		}
 		
-		for(int i = 0 ; i < file.length ; i++) {
-			System.out.println(file+"김범서s");
-			if(file[i].isEmpty()) {
-				continue;
-			}
-			FileVO fileVO = new FileVO();			
-			fileVO.setParentId(boardVO.getId());
-			fileVO.setTblId("102");
-			boolean result1= fileManager.uploadFile(file[i], fileVO);
-			
-			if(result1) {
-				int intresult=1;
-				result = intresult;
-			}
-		}
 		return result;
 	}
 

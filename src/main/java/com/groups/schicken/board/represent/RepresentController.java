@@ -101,8 +101,8 @@ public class RepresentController {
 	}
 
 	@PostMapping("update")
-	public String setUpdate(BoardVO boardVO,@RequestParam(value="attach") MultipartFile [] file)throws Exception{
-		int result = representService.update(boardVO,file);
+	public String setUpdate(BoardVO boardVO)throws Exception{
+		int result = representService.update(boardVO);
 
 		return "redirect:./list";
 	}
