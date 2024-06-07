@@ -283,10 +283,14 @@ update.addEventListener("click",(e)=>{
 del.addEventListener("click",(e)=>{
 	e.preventDefault();
 	
-	title.value +=del_title.innerHTML;
+	if(confirm("정말 삭제하시겠습니까?")){
+		alert("삭제 되었습니다.")
+		title.value +=del_title.innerHTML;
 	
-	frm.setAttribute("method","post");
-	frm.setAttribute("action","./delete");
+		frm.setAttribute("method","post");
+		frm.setAttribute("action","./delete");
+		
+		frm.submit();	
+		}	
 	
-	frm.submit();
 })

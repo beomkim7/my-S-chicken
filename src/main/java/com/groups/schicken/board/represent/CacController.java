@@ -32,7 +32,7 @@ public class CacController {
 	
 	@GetMapping("list")
 	public String cacList(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,Pager pager,Model model) throws Exception{
-		boardVO.setSort(1);
+		boardVO.setSort(0);
 		System.out.println(boardVO.getWriterId());
 		System.out.println(boardVO.getEmployeeVO()); 
 		List<BoardVO> ar = representService.getList(pager, boardVO);
@@ -106,7 +106,7 @@ public class CacController {
 	public String delete(BoardVO boardVO)throws Exception{
 		int result = representService.delete(boardVO);
 		
-		return "redirect:./cacList";
+		return "redirect:./list";
 	}
 		
 }
