@@ -12,11 +12,6 @@ public interface BoardService {
 	
 	public List<BoardVO> getList(Pager pager,BoardVO boardVO)throws Exception;
 	
-	public List<BoardVO> cacList(Pager pager,BoardVO boardVO)throws Exception;
-	
-	public List<BoardVO> allgetList(Pager pager,BoardVO boardVO)throws Exception;
-	
-	
 	public int add(BoardVO boardVO, MultipartFile [] attach)throws Exception;
 	
 	public BoardVO getDetail(BoardVO boardVO)throws Exception;

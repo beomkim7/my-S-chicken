@@ -79,23 +79,15 @@ public class RepresentController {
 	
 	@GetMapping("list")
 	public String getImpList(@AuthenticationPrincipal EmployeeVO employeeVO ,Pager pager,Model model,BoardVO boardVO) throws Exception {
-		
+		boardVO.setSort(1);
 		List<BoardVO> imp = representService.impList(boardVO);
 		model.addAttribute("imp", imp);
 		
 		List<BoardVO> ar = representService.getList(pager,boardVO);
 		
-		System.out.println(boardVO.getEmployeeVO());
 		model.addAttribute("list",ar);
 		model.addAttribute("pager", pager);
-		
-		System.out.println(ar);
-		
-		System.out.println(pager.isLast()+"김범서");
-		System.out.println(pager.getLastNum());
-		
-
-				
+						
 		return "board/list";
 	}
 

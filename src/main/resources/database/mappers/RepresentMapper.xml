@@ -12,6 +12,13 @@
 			</choose>
 	</sql>
 	
+	<sql id="sort"> 
+		<choose>
+			<when test="boardVO.sort == 0 and boardVO.sort != null">AND r.sort = 0</when>
+			<when test="boardVO.sort == 1 and boardVO.sort != null">AND r.sort = 1</when>
+		</choose>
+	</sql>
+	
 	<update id="impRank">
 		UPDATE represent
 		set rank =#{rank},important=#{important}
@@ -26,27 +33,10 @@
 			WHERE r.is_deleted !=1 AND important = 1
 			ORDER BY rank
 	</select>
-	
-	<select id="allTotalCount" parameterType="Map" resultType="Long">
-		SELECT COUNT(id) FROM represent r
-		WHERE is_deleted !=1
-		<include refid="search"/>
-	</select>	
-	
-	<select id="allList" parameterType="Map" resultMap="getDetailResult">
-		SELECT r.*,
-			emp.name
-			FROM represent r
-			LEFT JOIN employee emp ON emp.id =r.writer_id
-			WHERE r.is_deleted !=1
-			<include refid="search"/>
-			ORDER BY id DESC
-			LIMIT #{pager.startIndex},#{pager.perPage}
-	</select>
-	
+
 	<select id="getTotalCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(id) FROM represent r
-		WHERE is_deleted !=1 AND r.sort = 1
+		WHERE is_deleted !=1 <include refid="sort"/>
 		<include refid="search"/>
 	</select>	
 	
@@ -55,28 +45,12 @@
 			emp.name
 			 FROM represent r
 			LEFT JOIN employee emp ON emp.id =r.writer_id
-			WHERE r.is_deleted !=1 AND r.sort = 1
+			WHERE r.is_deleted !=1 <include refid="sort"/>
 			<include refid="search"/>
 			ORDER BY important DESC, id DESC
 			LIMIT #{pager.startIndex},#{pager.perPage}
-	</select>
-		
-	<select id="cacTotalCount" parameterType="Map" resultType="Long">
-		SELECT COUNT(id) FROM represent r
-		WHERE is_deleted !=1 AND r.sort = 0
-		<include refid="search"/>
 	</select>
 	
-	<select id="cacgetList" resultMap="getDetailResult">
-		SELECT r.*,
-			emp.name
-			FROM represent r
-			LEFT JOIN employee emp ON emp.id =r.writer_id
-			WHERE r.is_deleted !=1 AND r.sort = 0
-			<include refid="search"/>
-			ORDER BY important DESC, id DESC
-			LIMIT #{pager.startIndex},#{pager.perPage}
-	</select>
 	
 	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
 		SELECT 

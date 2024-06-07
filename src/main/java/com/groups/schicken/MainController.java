@@ -86,7 +86,7 @@ public class MainController {
     	BoardVO boardVO =new BoardVO();
     	Pager pager = new Pager();
     	boardVO.setWriterId(employeeVO.getId());
-		List<BoardVO> ar = representService.allgetList(pager, boardVO);
+		List<BoardVO> ar = representService.getList(pager, boardVO);
 		model.addAttribute("profile", profile);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);

@@ -40,7 +40,7 @@ public class RepresentService implements BoardService {
 		Map<String, Object> map = new HashMap<String,Object>();
 
 		map.put("pager", pager);
-		map.put("boadVO",boardVO);
+		map.put("boardVO",boardVO);
 
 		pager.makeIndex();
 		pager.makeNum(representDAO.getTotalCount(map));
@@ -50,33 +50,6 @@ public class RepresentService implements BoardService {
 		System.out.println(pager.getLastNum());
 
 		return representDAO.getList(map);
-	}
-
-	@Override
-	public List<BoardVO> cacList(Pager pager, BoardVO boardVO) throws Exception {
-		Map<String, Object> map = new HashMap<String,Object>();
-
-		map.put("pager", pager);
-		map.put("boadVO",boardVO);
-
-		pager.makeIndex();
-		pager.makeNum(representDAO.cacTotalCount(map));
-
-		return representDAO.cacgetList(map);
-
-	}
-
-	@Override
-	public List<BoardVO> allgetList(Pager pager, BoardVO boardVO) throws Exception {
-		Map<String, Object> map = new HashMap<String,Object>();
-
-		map.put("pager", pager);
-		map.put("boardVO", boardVO);
-
-		pager.makeIndex();
-		pager.makeNum(representDAO.allTotalCount(map));
-
-		return representDAO.allList(map);
 	}
 
 

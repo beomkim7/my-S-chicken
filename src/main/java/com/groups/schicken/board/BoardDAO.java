@@ -10,17 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BoardDAO {
 
 	public Long getTotalCount(Map<String,Object> map)throws Exception;
-
 	public List<BoardVO> getList(Map<String,Object> map)throws Exception;
 	
-	public Long cacTotalCount(Map<String,Object> map)throws Exception;
-	
-	public List<BoardVO> cacgetList(Map<String,Object> map)throws Exception;
-	
-	
-	public Long allTotalCount(Map<String,Object> map)throws Exception;
-	
-	public List<BoardVO> allList(Map<String, Object> map)throws Exception;
 	
 	public int impUpdate(BoardVO boardVO)throws Exception;
 	public int impRank(BoardVO boardVO)throws Exception;

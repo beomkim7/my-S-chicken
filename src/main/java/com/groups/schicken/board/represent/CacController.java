@@ -31,10 +31,10 @@ public class CacController {
 	
 	@GetMapping("list")
 	public String cacList(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,Pager pager,Model model) throws Exception{
-		//boardVO.setWriterId(employeeVO.getId());
+		boardVO.setSort(1);
 		System.out.println(boardVO.getWriterId());
 		System.out.println(boardVO.getEmployeeVO()); 
-		List<BoardVO> ar = representService.cacList(pager, boardVO);
+		List<BoardVO> ar = representService.getList(pager, boardVO);
 		
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
