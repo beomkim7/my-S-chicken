@@ -3,6 +3,7 @@ package com.groups.schicken.board.represent;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,12 +51,12 @@ public class CacController {
 		return "board/write";
 	}
 	@PostMapping("write")
-	public String write(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,@RequestParam(value="attach") MultipartFile attach)throws Exception{
+	public String getWrite(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,@RequestParam("attach") MultipartFile [] attach) throws Exception {
 		boardVO.setWriterId(employeeVO.getId());
-		
-		int result = representService.add(boardVO, attach);
-		
-		return "redirect:./cacList";
+		System.out.println(attach+"++++++++++++++++++++++++++");
+		System.out.println(attach.length);
+		int result = representService.add(boardVO,attach);
+		return "redirect:./list";		
 	}
 	
 	@GetMapping("detail")
@@ -85,12 +86,22 @@ public class CacController {
 	}
 	
 	@PostMapping("update")
-	public String update(BoardVO boardVO,@RequestParam(value="attach") MultipartFile attach)throws Exception{
-		int result = representService.update(boardVO, attach);
-		
-		return "redirect:./cacList";		
-		
+	public String setUpdate(BoardVO boardVO)throws Exception{
+		int result = representService.update(boardVO);
+
+		return "redirect:./list";
 	}
+	
+	@PostMapping("fileupdate")
+	public ResponseEntity<?> fileUpdate(BoardVO boardVO,@RequestParam(value="attach") MultipartFile file)throws Exception{
+		
+		int result = representService.fileupdate(boardVO,file);
+		boardVO=representService.getDetail(boardVO);
+		System.out.println(boardVO+"kbs3");
+
+		return ResponseEntity.ok(boardVO);
+	}
+
 	@PostMapping("delete")
 	public String delete(BoardVO boardVO)throws Exception{
 		int result = representService.delete(boardVO);
