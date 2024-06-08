@@ -19,6 +19,12 @@
 		</choose>
 	</sql>
 	
+	<sql id="countImp">
+		(select count(*) as subCount,id from represent where important = 1)
+		sub
+	</sql>
+	
+	
 	<update id="impRank">
 		UPDATE represent
 		set rank =#{rank},important=#{important}
@@ -26,12 +32,11 @@
 	</update>
 	
 	<select id="impList">
-		SELECT r.*,
-			emp.name
+		SELECT *
 			FROM represent r
-			LEFT JOIN employee emp ON emp.id =r.writer_id
-			WHERE r.is_deleted !=1 AND important = 1
-			ORDER BY rank
+			left join <include refid="countImp"/> on sub.id=r.id
+			WHERE r.is_deleted !=1 AND r.important = 1
+			ORDER BY ifnull(rank,0)
 	</select>
 
 	<select id="getTotalCount" parameterType="Map" resultType="Long">
@@ -47,7 +52,7 @@
 			LEFT JOIN employee emp ON emp.id =r.writer_id
 			WHERE r.is_deleted !=1 <include refid="sort"/>
 			<include refid="search"/>
-			ORDER BY important DESC, id DESC
+			ORDER BY IFNULL(rank,100), id DESC
 			LIMIT #{pager.startIndex},#{pager.perPage}
 	</select>
 	
@@ -91,7 +96,7 @@
 		</selectKey>
 		INSERT INTO represent
 		VALUES
-		(#{id},#{writeDate},#{content},0,#{writerId},0,#{sort},#{title},#{important},0)
+		(#{id},#{writeDate},#{content},0,#{writerId},0,#{sort},#{title},#{important},null,null,null)
 	</insert>
 	
 	<insert id="fileAdd" parameterType="FileVO" keyProperty="id">

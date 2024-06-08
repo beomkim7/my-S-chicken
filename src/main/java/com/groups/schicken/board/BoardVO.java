@@ -23,7 +23,7 @@ public class BoardVO {
 	private String modifyDate;
 	private String modifyId;
 	private Long rank;
-	
+	private Long subCount;
 
 
 	private List<FileVO> fileVO;

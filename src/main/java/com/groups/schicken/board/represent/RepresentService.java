@@ -137,19 +137,26 @@ public class RepresentService implements BoardService {
 		BoardVO vo2 = new BoardVO();
 		boardVO.setModifyDate(DateManager.getTodayDate());
 		int result=representDAO.update(boardVO);
-		
+		int imp = 0;
 		if(boardVO.getImportant()) {				
 			vo2.setImportant(boardVO.getImportant());
 			vo2.setWriterId(boardVO.getWriterId());
 			List<BoardVO> ar = representDAO.impList(vo2);
-			for(int i = 0 ; i<ar.size() ; i++) {
+			
+			if(ar.size()>3) {
+				vo2.setRank(null);
+				vo2.setImportant(null);
+				vo2.setId(ar.get(3).getId());
+				result = representDAO.impRank(vo2);
+			}
+			for(int i = 0 ; i<ar.size()-1 ; i++) {
+				if(ar.get(i).getRank() == null) {
+					ar.get(i).setRank(0L);
+				}
 				vo2.setRank(ar.get(i).getRank()+1L);
 				vo2.setId(ar.get(i).getId());
 				result = representDAO.impRank(vo2);
 			}
-		}else {
-			boardVO.setRank(0L);
-			result = representDAO.impRank(boardVO);
 		}
 		
 		return result;
