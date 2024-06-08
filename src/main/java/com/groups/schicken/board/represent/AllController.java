@@ -88,7 +88,7 @@ public class AllController {
 	}
 	
 	@GetMapping("update")
-	public String update(BoardVO boardVO,Model model)throws Exception{
+	public String update(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,Model model)throws Exception{
 		boardVO = representService.getDetail(boardVO);
 		
 		model.addAttribute("vo", boardVO);

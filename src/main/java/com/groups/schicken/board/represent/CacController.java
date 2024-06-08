@@ -86,7 +86,7 @@ public class CacController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(BoardVO boardVO)throws Exception{
+	public String setUpdate(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO)throws Exception{
 		int result = representService.update(boardVO);
 
 		return "redirect:./list";

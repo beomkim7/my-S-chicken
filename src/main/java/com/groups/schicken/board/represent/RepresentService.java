@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.groups.schicken.board.BoardService;
 import com.groups.schicken.board.BoardVO;
+import com.groups.schicken.common.util.DateManager;
 import com.groups.schicken.common.util.FileManager;
 import com.groups.schicken.common.vo.FileVO;
 import com.groups.schicken.common.vo.Pager;
@@ -25,10 +26,10 @@ public class RepresentService implements BoardService {
 	private FileManager fileManager;
 	@Autowired
 	private Noticer noticer;
-	@Value("app.upload.board.qna")
-	private String uploadPath;
+
 	
 	public List<BoardVO> impList(BoardVO boardVO) throws Exception{
+	
 		List<BoardVO> ar = representDAO.impList(boardVO);		
 		
 		return ar;
@@ -134,6 +135,7 @@ public class RepresentService implements BoardService {
 	@Override
 	public int update(BoardVO boardVO) throws Exception {
 		BoardVO vo2 = new BoardVO();
+		boardVO.setModifyDate(DateManager.getTodayDate());
 		int result=representDAO.update(boardVO);
 		
 		if(boardVO.getImportant()) {				

@@ -137,7 +137,7 @@
 			<if test="content != null and content !=''">
 				content=#{content},
 			</if>
-				important=#{important}
+				important=#{important},modify_date=#{modifyDate},modify_id=#{modifyId}
 		</set>
 		WHERE id=#{id}
 	</update>

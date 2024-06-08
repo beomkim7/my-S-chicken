@@ -71,8 +71,7 @@ public class RepresentController {
 	@PostMapping("write")
 	public String getWrite(@AuthenticationPrincipal EmployeeVO employeeVO,BoardVO boardVO,@RequestParam("attach") MultipartFile [] attach) throws Exception {
 		boardVO.setWriterId(employeeVO.getId());
-		System.out.println(attach+"++++++++++++++++++++++++++");
-		System.out.println(attach.length);
+
 		int result = representService.add(boardVO,attach);
 		return "redirect:./list";		
 	}
@@ -101,7 +100,8 @@ public class RepresentController {
 	}
 
 	@PostMapping("update")
-	public String setUpdate(BoardVO boardVO)throws Exception{
+	public String setUpdate(@AuthenticationPrincipal EmployeeVO employeeVO ,BoardVO boardVO)throws Exception{
+		boardVO.setModifyId(employeeVO.getId());
 		int result = representService.update(boardVO);
 
 		return "redirect:./list";
