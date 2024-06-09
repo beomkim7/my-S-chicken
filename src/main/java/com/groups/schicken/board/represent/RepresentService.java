@@ -59,19 +59,28 @@ public class RepresentService implements BoardService {
 		BoardVO vo2 = new BoardVO();
 			int result=representDAO.add(boardVO);
 			
-			if(boardVO.getImportant()) {				
+			if(boardVO.getImportant()) {
+				noticer.sendNoticeWhole(getNoticeContent(boardVO.getTitle()), boardVO.getId() + "" , NotificationType.Notice);
+				vo2.setRank(0L);
 				vo2.setImportant(boardVO.getImportant());
-				vo2.setWriterId(boardVO.getWriterId());
+				vo2.setId(boardVO.getId());
+				result = representDAO.impRank(vo2);
 				List<BoardVO> ar = representDAO.impList(vo2);
+
 				for(int i = 0 ; i<ar.size() ; i++) {
+					System.out.println(ar+"rlaqjatj");
 					vo2.setRank(ar.get(i).getRank()+1L);
+					vo2.setImportant(ar.get(i).getImportant());
 					vo2.setId(ar.get(i).getId());
 					result = representDAO.impRank(vo2);
 				}
-			}
-
-			if(boardVO.getImportant()){
-				noticer.sendNoticeWhole(getNoticeContent(boardVO.getTitle()), boardVO.getId() + "" , NotificationType.Notice);
+				
+				if(ar.size()>3) {
+					vo2.setRank(null);
+					vo2.setImportant(false);
+					vo2.setId(ar.get(3).getId());
+					result = representDAO.impRank(vo2);
+				}
 			}
 			
 			for(int i =0 ; i <attach.length ; i++) {
@@ -138,7 +147,8 @@ public class RepresentService implements BoardService {
 		boardVO.setModifyDate(DateManager.getTodayDate());
 		int result=representDAO.update(boardVO);
 		
-		if(boardVO.getImportant()) {		
+		if(boardVO.getImportant()) {
+			noticer.sendNoticeWhole(getNoticeContent(boardVO.getTitle()), boardVO.getId() + "" , NotificationType.Notice);
 			vo2.setImportant(boardVO.getImportant());
 			List<BoardVO> ar = representDAO.impList(vo2);
 
