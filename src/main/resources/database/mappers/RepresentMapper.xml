@@ -142,6 +142,9 @@
 			<if test="content != null and content !=''">
 				content=#{content},
 			</if>
+			<if test="important !=null and important !=0">
+				rank = 0,
+			</if>
 				important=#{important},modify_date=#{modifyDate},modify_id=#{modifyId}
 		</set>
 		WHERE id=#{id}
