@@ -3,8 +3,10 @@ package com.groups.schicken.common.aws;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +49,28 @@ public class S3Service {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    public String s3FileUpload(MultipartFile multipartFile, String dir) throws IOException {
+        //파일명 설정 : {UUID}_{경로}.{extension}
+        String extension = UUID.randomUUID().toString();
+        String s3FileName = "https://s3.ap-northeast-2.amazonaws.com/"+bucket+"/"+extension;
+        //파일 저장경로 설정
+        
+
+        //파일 사이즈 설정
+        ObjectMetadata objMeta = new ObjectMetadata();
+        objMeta.setContentLength(multipartFile.getSize());
+
+        String keyName = s3FileName;
+
+        //파일 업로드
+        // 외부에 공개하는 파일인 경우 Public Read 권한을 추가, ACL 확인
+        amazonS3Client.putObject(bucket, extension, multipartFile.getInputStream(), objMeta);
+                
+
+
+        return s3FileName;
     }
 
     public boolean deleteFile(FileVO fileVO) throws Exception {

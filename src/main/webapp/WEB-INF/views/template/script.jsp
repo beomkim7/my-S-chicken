@@ -10,6 +10,9 @@
 
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
+
+
 
 <!-- Vendor JS Files -->
 <script src="/vendor/apexcharts/apexcharts.min.js"></script>

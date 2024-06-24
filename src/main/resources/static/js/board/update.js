@@ -71,9 +71,13 @@ const board_id = document.getElementById("board_id")
 	
 
     ClassicEditor
-        .create(document.querySelector('#editor'))
+        .create(document.querySelector('#editor'),{
+			ckfinder:{
+				uploadUrl : 'http://localhost/ck'
+			}
+		})
         .then(editor => {
-
+			window.editor = editor;
             editor.editing.view.change(writer => {
                 writer.setStyle('height', '50vh', editor.editing.view.document.getRoot());
 		const editordata = editor.getData();
