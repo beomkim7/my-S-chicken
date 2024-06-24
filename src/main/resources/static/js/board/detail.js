@@ -32,7 +32,7 @@ fetch("/reply/list?parentId="+id,{
 		if(login_id == reply.writerId && reply.fileVO==null){
 			replies += 
 			`
-				<div class="d-flex mb-2">
+				<div class="d-flex mb-2 card-body">
 					
 						<img width="50" height="50" src="/img/avatar.png" alt="프로필"  onerror="this.onerror=null; this.src='/img/기본.jpg';" class="me-3">
 					

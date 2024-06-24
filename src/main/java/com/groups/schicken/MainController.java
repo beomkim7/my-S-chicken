@@ -84,6 +84,7 @@ public class MainController {
     	EmployeeProfileVO profile = employeeService.getProfile(id);
 
     	BoardVO boardVO =new BoardVO();
+    	boardVO.setSort(3);
     	Pager pager = new Pager();
     	boardVO.setWriterId(employeeVO.getId());
 		List<BoardVO> ar = representService.getList(pager, boardVO);

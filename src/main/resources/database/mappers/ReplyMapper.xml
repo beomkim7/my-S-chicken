@@ -29,7 +29,7 @@
 			ON att.tbl_id = 1077 AND att.parent_id = emp.id
 			
 			WHERE r.parent_id=#{replyVO.parentId}
-			ORDER BY id DESC
+			ORDER BY id
 			LIMIT #{pager.startIndex},#{pager.perPage}
 	</select>
 	

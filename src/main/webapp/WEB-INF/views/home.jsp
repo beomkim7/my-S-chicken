@@ -50,6 +50,18 @@
 										</thead>
 										<tbody>
 											<c:forEach items="${list}" var="vo" end="4">
+												<c:if test="${vo.important eq 'true'}">
+													<tr id="important">
+														<input type="hidden" id="important_val" value="${vo.important}">
+														<td>${vo.id}</td>
+														<td class="text-start" style="max-width: 150px;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;">
+															<b>중요  </b><a href="./all/detail?id=${vo.id}">${vo.title}</a></td>
+														<td>${vo.writeDate}</td>
+														<td>${vo.employeeVO.name}</td>
+														<td>${vo.hit}</td>
+													</tr>
+												</c:if>
+												<c:if test="${vo.important eq 'false'}">
 													<tr id="important">
 														<input type="hidden" id="important_val" value="${vo.important}">
 														<td>${vo.id}</td>
@@ -59,6 +71,8 @@
 														<td>${vo.employeeVO.name}</td>
 														<td>${vo.hit}</td>
 													</tr>
+
+												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
