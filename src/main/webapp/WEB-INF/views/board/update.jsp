@@ -13,6 +13,10 @@
         #editor {
             height: 50vh;
         }
+        .ck {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
