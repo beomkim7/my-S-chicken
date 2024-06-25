@@ -93,7 +93,7 @@ const board_id = document.getElementById("board_id")
             upload() {
                 return this.loader.file
                     .then(file => new Promise((resolve, reject) => {
-                        this._resizeImage(file, 800, 600, resolve, reject);
+                        this._resizeImage(file, 600, 400, resolve, reject);
                     }));
             }
 

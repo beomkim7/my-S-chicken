@@ -47,21 +47,97 @@ let files = document.querySelectorAll(".files")
 		}
 		
 	})
-
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-
-            editor.editing.view.change(writer => {
-                writer.setStyle('height', '50vh', editor.editing.view.document.getRoot());
-		const editordata = editor.getData();
-         
-                
+		 ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: '/ck'
+                }
+            })
+            .then(editor => {
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new MyUploadAdapter(loader);
+                };
+            })
+            .catch(error => {
+                console.error(error);
             });
-        })
-        .catch(error => {
-            console.error(error);
-        });
+
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        this._resizeImage(file, 600, 400, resolve, reject);
+                    }));
+            }
+
+            abort() {
+                // Reject the promise returned from upload() method.
+            }
+
+            _resizeImage(file, maxWidth, maxHeight, resolve, reject) {
+                const reader = new FileReader();
+                reader.onload = event => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        canvas.toBlob(blob => {
+                            const newFile = new File([blob], file.name, {
+                                type: file.type,
+                                lastModified: Date.now()
+                            });
+                            this._sendToServer(newFile, resolve, reject);
+                        }, file.type);
+                    };
+                    img.onerror = () => reject('Image load error');
+                    img.src = event.target.result;
+                };
+                reader.onerror = () => reject('File read error');
+                reader.readAsDataURL(file);
+            }
+
+            _sendToServer(file, resolve, reject) {
+                const data = new FormData();
+                data.append('upload', file);
+
+                fetch('/ck', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => response.json())
+                .then(result => {
+                    resolve({
+                        default: result.url
+                    });
+                })
+                .catch(reject);
+            }
+        }
+
 
 
 	attach_id.addEventListener("change",()=>{
