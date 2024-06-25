@@ -6,6 +6,8 @@
 * License: https://bootstrapmade.com/license/
 */
 
+
+
 const namecardModal = new bootstrap.Modal(document.getElementById("namecard-modal"));
 function onProfileClick(empId){
   if(empId == '-1') return;
