@@ -13,7 +13,7 @@
         #editor {
             height: 50vh;
         }
-        .ck {
+        .ck-content img {
             max-width: 100%;
             height: auto;
         }
