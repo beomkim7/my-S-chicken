@@ -41,10 +41,11 @@ public class ReplyController {
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<Integer> delete(@RequestBody ReplyVO replyVO) throws Exception{
-		
-		int result = replyService.delete(replyVO);
-		
+	public ResponseEntity<Integer> delete(@AuthenticationPrincipal EmployeeVO employeeVO,@RequestBody ReplyVO replyVO) throws Exception{
+		int result = 0;
+		if(employeeVO.getId()==replyVO.getId().toString()) {
+		result = replyService.delete(replyVO);
+		}
 		return ResponseEntity.ok(result);
 	}
 	

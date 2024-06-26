@@ -11,7 +11,11 @@
     <title>S치킨-그룹웨어</title>
     <c:import url="../template/head.jsp"/>
 </head>
-
+<style>
+    i ::before{
+        width: 10;
+    }
+</style>
 <body>
 <!-- ======= Header ======= -->
 <c:import url="../template/header.jsp"/>
