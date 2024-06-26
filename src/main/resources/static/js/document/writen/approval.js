@@ -34,9 +34,9 @@ refuse_btn.addEventListener("click",(e)=>{
 	
 	e.preventDefault();
 	
-	let msg = prompt("내용을 입력해주세요",);
+	let msg = prompt("반려의견을 입력하세요",);
 	if(msg == ""){
-		alert("사유를 입력하세요");
+		alert("반려의견을 입력하세요");
 		return;
 	}
 	if(msg != null){
