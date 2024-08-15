@@ -49,7 +49,7 @@
 		SELECT r.*,
 			emp.name
 			 FROM represent r
-			LEFT JOIN employee emp ON emp.id =r.writer_id
+			inner JOIN employee emp ON emp.id =r.writer_id
 			WHERE r.is_deleted !=1 <include refid="sort"/>
 			<include refid="search"/>
 			ORDER BY IFNULL(rank,10), id DESC
@@ -68,7 +68,7 @@
 		a.tbl_id attach_tbl_id,
 		a.name attach_name
 		FROM represent r
-		LEFT JOIN attach a ON r.id = a.parent_id
+		inner JOIN attach a ON r.id = a.parent_id
 		WHERE r.id=#{id}
 	</select>
 		
