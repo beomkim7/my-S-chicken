@@ -68,7 +68,7 @@
 		a.tbl_id attach_tbl_id,
 		a.name attach_name
 		FROM represent r
-		inner JOIN attach a ON r.id = a.parent_id
+		left JOIN attach a ON r.id = a.parent_id
 		WHERE r.id=#{id}
 	</select>
 		

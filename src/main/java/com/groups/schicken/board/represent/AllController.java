@@ -44,6 +44,7 @@ public class AllController {
 		model.addAttribute("pager", pager);
 		
 		System.out.println(pager);
+		System.out.println(ar);
 		
 		
 		return "board/list";
