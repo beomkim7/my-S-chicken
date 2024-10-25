@@ -1,6 +1,4 @@
 
-console.log("들어오나?")
-
 
 const btn = document.getElementById("btn")
 let title = document.getElementById("title")
@@ -14,7 +12,7 @@ const board = document.querySelector("h1")
 const fileman = document.getElementById("file_man")
 const ment = document.getElementById("ment")
 const board_id = document.getElementById("board_id")
-
+	console.log(important.value)
 	let arr = [];
 	
 	fetch("/represent/fileShow?id=" + board_id.value, {
@@ -48,26 +46,27 @@ const board_id = document.getElementById("board_id")
 	window.addEventListener('load',function(){
 		sort.value=sort.dataset.sort
 		
-		if(important.value=='true'){		
+		if(important.value=='true'){
+			console.log(important.value);
 			important.checked=true;
 			important.value=1;
 		}else{
 			important.value=0;
+			important.disabled=true;
 		}
 	})
 
-
-
-	function check1(){
-		if(important.checked){
-			important.value=1;
-			console.log("체크됨")
-			console.log(important.value)
+	sort.addEventListener('change',function(){
+		console.log(sort.value);
+		if(sort.value==1){
+			important.disabled=false;
 		}else{
-			important.value=0;
-		
+			important.disabled=true;
+			important.checked=false;
+			important.value = 0;
 		}
-	}
+	})
+
 	
 
         ClassicEditor
