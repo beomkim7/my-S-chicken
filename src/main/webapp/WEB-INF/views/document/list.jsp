@@ -41,18 +41,18 @@
                                         <a href="#" onclick="openbonus()">상여금신청서</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="text-start">
-                                        <a href="#" onclick="openvaca()">휴가계획서</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="text-start">
-                                        <a href="#" onclick="openretire()">퇴사신청서</a>
-                                    </td>
-                                </tr>
+<%--                                <tr>--%>
+<%--                                    <td>2</td>--%>
+<%--                                    <td class="text-start">--%>
+<%--                                        <a href="#" onclick="openvaca()">휴가계획서</a>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <td>3</td>--%>
+<%--                                    <td class="text-start">--%>
+<%--                                        <a href="#" onclick="openretire()">퇴사신청서</a>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
                             </tbody>
                         </table>
                     </div>
